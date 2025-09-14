@@ -4,8 +4,10 @@ const Razorpay = require("razorpay");
 
 exports.handler = async (event) => {
   try {
-    // Parse request body
-    const body = JSON.parse(event.body);
+    let body = {};
+    if (event.body) {
+      body = JSON.parse(event.body);
+    }
 
     // Razorpay instance
     const razorpay = new Razorpay({
@@ -15,9 +17,10 @@ exports.handler = async (event) => {
 
     // Create order
     const options = {
-      amount: 24900, // ₹249 in paise
+      amount: 24900, // ₹249 = 24900 paise
       currency: "INR",
       receipt: "receipt_" + Date.now(),
+      notes: body, // user ke details bhi save kar lenge
     };
 
     const order = await razorpay.orders.create(options);
@@ -32,7 +35,6 @@ exports.handler = async (event) => {
       }),
     };
   } catch (error) {
-    console.error("Error in create-order:", error);
     return {
       statusCode: 500,
       body: JSON.stringify({ error: error.message }),
