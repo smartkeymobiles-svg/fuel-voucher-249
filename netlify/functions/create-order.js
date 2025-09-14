@@ -6,21 +6,23 @@ exports.handler = async (event) => {
   try {
     let body = {};
     if (event.body) {
-      body = JSON.parse(event.body);
+      try {
+        body = JSON.parse(event.body);
+      } catch {
+        body = {};
+      }
     }
 
-    // Razorpay instance
     const razorpay = new Razorpay({
       key_id: process.env.RAZORPAY_KEY_ID,
       key_secret: process.env.RAZORPAY_KEY_SECRET,
     });
 
-    // Create order
     const options = {
-      amount: 24900, // ₹249 = 24900 paise
+      amount: 24900,
       currency: "INR",
       receipt: "receipt_" + Date.now(),
-      notes: body, // user ke details bhi save kar lenge
+      notes: body,
     };
 
     const order = await razorpay.orders.create(options);
@@ -28,6 +30,7 @@ exports.handler = async (event) => {
     return {
       statusCode: 200,
       body: JSON.stringify({
+        ok: true,
         key: process.env.RAZORPAY_KEY_ID,
         amount: order.amount,
         currency: order.currency,
@@ -37,7 +40,7 @@ exports.handler = async (event) => {
   } catch (error) {
     return {
       statusCode: 500,
-      body: JSON.stringify({ error: error.message }),
+      body: JSON.stringify({ ok: false, error: error.message }),
     };
   }
 };
