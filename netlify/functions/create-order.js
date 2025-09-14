@@ -4,6 +4,7 @@ const Razorpay = require("razorpay");
 
 exports.handler = async (event) => {
   try {
+    // body ko parse karna (agar empty ho to crash na ho)
     let body = {};
     if (event.body) {
       try {
@@ -13,18 +14,21 @@ exports.handler = async (event) => {
       }
     }
 
+    // Razorpay instance
     const razorpay = new Razorpay({
       key_id: process.env.RAZORPAY_KEY_ID,
       key_secret: process.env.RAZORPAY_KEY_SECRET,
     });
 
+    // Order options
     const options = {
-      amount: 24900,
+      amount: 24900, // ₹249 = 24900 paise
       currency: "INR",
       receipt: "receipt_" + Date.now(),
-      notes: body,
+      notes: body, // customer details bhi save ho jaayenge
     };
 
+    // Order create karna
     const order = await razorpay.orders.create(options);
 
     return {
