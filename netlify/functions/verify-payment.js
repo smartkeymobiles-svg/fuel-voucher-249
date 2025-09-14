@@ -8,34 +8,36 @@ exports.handler = async (event) => {
 
     const { razorpay_order_id, razorpay_payment_id, razorpay_signature } = body;
 
-    // Signature verification
-    const sign = razorpay_order_id + "|" + razorpay_payment_id;
-    const expectedSign = crypto
-      .createHmac("sha256", process.env.RAZORPAY_KEY_SECRET)
-      .update(sign.toString())
-      .digest("hex");
+    // Signature verify karna
+    const shasum = crypto.createHmac("sha256", process.env.RAZORPAY_KEY_SECRET);
+    shasum.update(razorpay_order_id + "|" + razorpay_payment_id);
+    const digest = shasum.digest("hex");
 
-    if (expectedSign === razorpay_signature) {
-      // Payment verified ✅
-      const voucherCode =
-        "FV-" + Math.random().toString(36).substr(2, 8).toUpperCase();
+    if (digest === razorpay_signature) {
+      // Random voucher code generate karo
+      const voucher = "FV-" + Math.random().toString(36).substr(2, 6).toUpperCase();
 
       return {
         statusCode: 200,
-        body: JSON.stringify({ ok: true, voucher: voucherCode }),
+        body: JSON.stringify({
+          ok: true,
+          voucher: voucher,
+        }),
       };
     } else {
-      // Payment failed ❌
       return {
         statusCode: 400,
-        body: JSON.stringify({ ok: false, error: "Invalid signature" }),
+        body: JSON.stringify({
+          ok: false,
+          error: "Invalid signature",
+        }),
       };
     }
   } catch (error) {
+    console.error("Error in verify-payment:", error);
     return {
       statusCode: 500,
       body: JSON.stringify({ error: error.message }),
     };
   }
 };
-
