@@ -1,46 +1,41 @@
-/ netlify/functions/create-order.js
-const fetch = require("node-fetch");
+// netlify/functions/create-order.js
 
-exports.handler = async (event, context) => {
-  if (event.httpMethod !== "POST") {
-    return { statusCode: 405, body: "Method Not Allowed" };
-  }
+const Razorpay = require("razorpay");
 
-  const { name, mobile, email, vehicle } = JSON.parse(event.body);
-
-  const RAZORPAY_KEY_ID = process.env.RAZORPAY_KEY_ID;
-  const RAZORPAY_KEY_SECRET = process.env.RAZORPAY_KEY_SECRET;
-
-  const auth = Buffer.from(`${RAZORPAY_KEY_ID}:${RAZORPAY_KEY_SECRET}`).toString("base64");
-
+exports.handler = async (event) => {
   try {
-    const resp = await fetch("https://api.razorpay.com/v1/orders", {
-      method: "POST",
-      headers: {
-        Authorization: `Basic ${auth}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        amount: 24900, // ₹249 in paise
-        currency: "INR",
-        receipt: `rcpt_${Date.now()}`,
-        notes: { name, mobile, email, vehicle },
-      }),
+    // Parse request body
+    const body = JSON.parse(event.body);
+
+    // Razorpay instance
+    const razorpay = new Razorpay({
+      key_id: process.env.RAZORPAY_KEY_ID,
+      key_secret: process.env.RAZORPAY_KEY_SECRET,
     });
 
-    const data = await resp.json();
+    // Create order
+    const options = {
+      amount: 24900, // ₹249 in paise
+      currency: "INR",
+      receipt: "receipt_" + Date.now(),
+    };
+
+    const order = await razorpay.orders.create(options);
 
     return {
       statusCode: 200,
       body: JSON.stringify({
-        order_id: data.id,
-        key: RAZORPAY_KEY_ID,
-        amount: 24900,
-        currency: "INR",
+        key: process.env.RAZORPAY_KEY_ID,
+        amount: order.amount,
+        currency: order.currency,
+        order_id: order.id,
       }),
     };
-  } catch (err) {
-    return { statusCode: 500, body: "Order creation failed" };
+  } catch (error) {
+    console.error("Error in create-order:", error);
+    return {
+      statusCode: 500,
+      body: JSON.stringify({ error: error.message }),
+    };
   }
 };
-
