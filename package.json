@@ -1,0 +1,9 @@
+{
+  "name": "fuel-voucher-249",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "razorpay": "^2.8.6"
+  }
+}
