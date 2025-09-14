@@ -12,16 +12,20 @@
     header img { height:50px; }
     nav a { color:#fff; margin:0 12px; text-decoration:none; font-weight:bold; }
     nav a:hover { text-decoration:underline; }
-    .container { width:90%; max-width:1000px; margin:30px auto; }
+    .container { width:90%; max-width:1100px; margin:40px auto; }
     .hero {
       background: url('banner.jpg') center/cover no-repeat;
-      padding: 80px 40px;
+      padding: 120px 40px;
       text-align: center;
       border-radius: 12px;
       color: #fff;
       box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      min-height: 70vh;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
     }
-    .hero h1 { font-size:2.2rem; margin-bottom:20px; }
+    .hero h1 { font-size:2.8rem; margin-bottom:20px; }
     form { background:#fff; color:#000; padding:20px; border-radius:8px; max-width:400px; margin:20px auto; text-align:left; }
     label { display:block; margin:8px 0 4px; }
     input { width:100%; padding:8px; border:1px solid #ccc; border-radius:5px; }
@@ -39,6 +43,9 @@
       <a href="#home">Home</a>
       <a href="#how">How It Works</a>
       <a href="#terms">Terms</a>
+      <a href="#refund">Refund Policy</a>
+      <a href="#shipping">Shipping Policy</a>
+      <a href="#privacy">Privacy Policy</a>
       <a href="#faq">FAQ</a>
       <a href="#contact">Contact</a>
     </nav>
@@ -47,9 +54,9 @@
   <!-- Home Page -->
   <section id="home" class="container hero">
     <h1>Buy Indian Oil Fuel Voucher</h1>
-    <p>Pay just ₹249 and get a fuel voucher you can redeem at Indian Oil petrol pumps across India.</p>
+    <p style="font-size:20px;">Pay just ₹249 and get a fuel voucher you can redeem at Indian Oil petrol pumps across India.</p>
     <br>
-    <p style="font-size:18px; font-weight:bold; color:yellow;">
+    <p style="font-size:22px; font-weight:bold; color:yellow;">
       ✅ Guaranteed ₹1200 Fuel on Purchase
     </p>
 
@@ -73,7 +80,7 @@
     <div id="resultBox"></div>
   </section>
 
-  <!-- How it Works Page -->
+  <!-- How it Works -->
   <section id="how" class="container">
     <h2>How It Works</h2>
     <ol>
@@ -85,7 +92,7 @@
     </ol>
   </section>
 
-  <!-- Terms Page -->
+  <!-- Terms -->
   <section id="terms" class="container">
     <h2>Terms & Conditions</h2>
     <ul>
@@ -98,18 +105,49 @@
     </ul>
   </section>
 
-  <!-- FAQ Page -->
+  <!-- Refund Policy -->
+  <section id="refund" class="container">
+    <h2>Refund & Cancellation Policy</h2>
+    <p>All voucher purchases are <strong>non-refundable</strong>. Once the payment is processed, it cannot be cancelled.</p>
+    <ul>
+      <li>Voucher validity: 6 months from purchase.</li>
+      <li>Expired or unused vouchers cannot be refunded.</li>
+      <li>No replacements for lost or stolen vouchers.</li>
+    </ul>
+  </section>
+
+  <!-- Shipping Policy -->
+  <section id="shipping" class="container">
+    <h2>Shipping Policy</h2>
+    <p>This is a digital product. No physical shipping is required.</p>
+    <ul>
+      <li>Delivery Mode: Email & On-screen confirmation</li>
+      <li>Delivery Time: Instant after successful payment</li>
+    </ul>
+  </section>
+
+  <!-- Privacy Policy -->
+  <section id="privacy" class="container">
+    <h2>Privacy Policy</h2>
+    <p>Your privacy is important to us. We only collect information necessary to process your order.</p>
+    <ul>
+      <li>We do not share your personal data with third parties.</li>
+      <li>Payments are securely processed by Razorpay.</li>
+      <li>We may contact you only regarding your voucher order.</li>
+    </ul>
+  </section>
+
+  <!-- FAQ -->
   <section id="faq" class="container">
     <h2>FAQ</h2>
     <p><strong>Q: Where can I use this voucher?</strong><br>A: At participating Indian Oil petrol pumps across India.</p>
-    <p><strong>Q: How will I receive my voucher?</strong><br>A: You will see it on screen after payment, and it will also be sent to your email / WhatsApp (future setup).</p>
+    <p><strong>Q: How will I receive my voucher?</strong><br>A: You will see it on screen after payment, and it will also be sent to your email.</p>
     <p><strong>Q: Is the voucher refundable?</strong><br>A: No, once purchased it cannot be refunded.</p>
   </section>
 
-  <!-- Contact Page -->
+  <!-- Contact -->
   <section id="contact" class="container">
     <h2>Contact Us</h2>
-    <p>If you have any questions, reach out to us:</p>
     <p>Email: <a href="mailto:support@yourdomain.in">support@yourdomain.in</a></p>
     <p>Phone: +91-9876543210</p>
     <p>WhatsApp: +91-9876543210</p>
