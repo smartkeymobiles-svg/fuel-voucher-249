@@ -6,32 +6,28 @@
   <title>Fuel Voucher - Indian Oil</title>
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <style>
-    * { margin:0; padding:0; box-sizing: border-box; font-family: Arial, sans-serif; }
+    * { margin:0; padding:0; box-sizing:border-box; font-family: Arial, sans-serif; }
     body { background:#f5f7fa; color:#222; line-height:1.6; }
     header { background:#002f6c; color:#fff; padding:15px 20px; display:flex; align-items:center; justify-content:space-between; }
     header img { height:50px; }
     nav a { color:#fff; margin:0 12px; text-decoration:none; font-weight:bold; }
     nav a:hover { text-decoration:underline; }
-    .container { width:90%; max-width:1100px; margin:40px auto; }
+    .container { width:90%; max-width:1000px; margin:30px auto; }
     .hero {
-      background: url('banner.jpg') center/cover no-repeat;
-      padding: 120px 40px;
-      text-align: center;
+      background:#004080;
+      padding: 60px 30px;
+      text-align:center;
       border-radius: 12px;
-      color: #fff;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-      min-height: 70vh;
-      display:flex;
-      flex-direction:column;
-      justify-content:center;
+      color:#fff;
+      box-shadow:0 4px 12px rgba(0,0,0,0.2);
     }
-    .hero h1 { font-size:2.8rem; margin-bottom:20px; }
+    .hero h1 { font-size:2.5rem; margin-bottom:20px; }
     form { background:#fff; color:#000; padding:20px; border-radius:8px; max-width:400px; margin:20px auto; text-align:left; }
     label { display:block; margin:8px 0 4px; }
     input { width:100%; padding:8px; border:1px solid #ccc; border-radius:5px; }
     button { margin-top:10px; padding:10px 20px; background:#ff6600; color:#fff; border:none; border-radius:5px; cursor:pointer; }
     button:hover { background:#e65c00; }
-    #resultBox { margin-top:20px; color:green; font-weight:bold; text-align:center; }
+    #resultBox { margin-top:20px; font-weight:bold; text-align:center; }
     footer { background:#002f6c; color:#fff; padding:20px; margin-top:40px; text-align:center; }
     footer p { margin:6px 0; }
   </style>
@@ -51,28 +47,23 @@
     </nav>
   </header>
 
-  <!-- Home Page -->
   <section id="home" class="container hero">
     <h1>Buy Indian Oil Fuel Voucher</h1>
-    <p style="font-size:20px;">Pay just ₹249 and get a fuel voucher you can redeem at Indian Oil petrol pumps across India.</p>
-    <br>
-    <p style="font-size:22px; font-weight:bold; color:yellow;">
-      ✅ Guaranteed ₹1200 Fuel on Purchase
-    </p>
+    <p style="font-size:18px;">Pay just ₹249 and get a fuel voucher redeemable at Indian Oil petrol pumps across India.</p>
+    <p style="font-size:20px; font-weight:bold; color:yellow;">✅ Guaranteed ₹1200 Fuel on Purchase</p>
 
-    <!-- Form -->
     <form id="buyForm">
       <label>Name:</label>
-      <input type="text" name="name" required><br><br>
+      <input type="text" name="name" required>
 
       <label>Mobile:</label>
-      <input type="text" name="mobile" required><br><br>
+      <input type="text" name="mobile" required>
 
       <label>Email:</label>
-      <input type="email" name="email" required><br><br>
+      <input type="email" name="email" required>
 
       <label>Vehicle Number:</label>
-      <input type="text" name="vehicle" required><br><br>
+      <input type="text" name="vehicle" required>
 
       <button type="submit">Buy Now ₹249</button>
     </form>
@@ -80,71 +71,11 @@
     <div id="resultBox"></div>
   </section>
 
-  <!-- How it Works -->
-  <section id="how" class="container">
-    <h2>How It Works</h2>
-    <ol>
-      <li>Fill your details in the form above.</li>
-      <li>Click on “Buy Now ₹249”.</li>
-      <li>Complete the secure payment via Razorpay (UPI / Card / Net Banking).</li>
-      <li>Receive your unique fuel voucher code instantly.</li>
-      <li>Show the voucher code at any Indian Oil pump to redeem.</li>
-    </ol>
-  </section>
-
-  <!-- Terms -->
-  <section id="terms" class="container">
-    <h2>Terms & Conditions</h2>
-    <ul>
-      <li>Voucher value: ₹1200 worth of fuel (Petrol/Diesel).</li>
-      <li>Voucher purchase price: ₹249 (non-refundable).</li>
-      <li>Valid for 6 months from the date of purchase.</li>
-      <li>One-time use only. Cannot be clubbed with other offers.</li>
-      <li>Acceptance of voucher is subject to outlet policy.</li>
-      <li>We are independent voucher sellers, not directly affiliated with Indian Oil Corporation.</li>
-    </ul>
-  </section>
-
-  <!-- Refund Policy -->
-  <section id="refund" class="container">
-    <h2>Refund & Cancellation Policy</h2>
-    <p>All voucher purchases are <strong>non-refundable</strong>. Once the payment is processed, it cannot be cancelled.</p>
-  </section>
-
-  <!-- Shipping Policy -->
-  <section id="shipping" class="container">
-    <h2>Shipping Policy</h2>
-    <p>This is a digital product. No physical shipping is required. Delivery via Email & On-screen confirmation, instant after payment.</p>
-  </section>
-
-  <!-- Privacy Policy -->
-  <section id="privacy" class="container">
-    <h2>Privacy Policy</h2>
-    <p>Your privacy is important to us. We only collect info needed to process your order. Payments handled securely via Razorpay.</p>
-  </section>
-
-  <!-- FAQ -->
-  <section id="faq" class="container">
-    <h2>FAQ</h2>
-    <p><strong>Q: Where can I use this voucher?</strong><br>A: At participating Indian Oil petrol pumps across India.</p>
-    <p><strong>Q: How will I receive my voucher?</strong><br>A: On screen after payment + sent to your email.</p>
-    <p><strong>Q: Is the voucher refundable?</strong><br>A: No, once purchased it cannot be refunded.</p>
-  </section>
-
-  <!-- Contact -->
-  <section id="contact" class="container">
-    <h2>Contact Us</h2>
-    <p>Email: <a href="mailto:indianoilvouchers@gmail.com">indianoilvouchers@gmail.com</a></p>
-    <p>Phone: +91-9876543210</p>
-    <p>WhatsApp: +91-9876543210</p>
-  </section>
-
   <footer>
     <p>© 2025 Fuel Voucher. All Rights Reserved.</p>
-    <p>Contact: <a href="mailto:indianoilvouchers@gmail.com">indianoilvouchers@gmail.com</a> | +91-9876543210</p>
+    <p>Contact: indianoilvouchers@gmail.com | +91-9876543210</p>
   </footer>
 
-  <!-- Razorpay + Formspree Script -->
   <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
   <script>
     const form = document.getElementById('buyForm');
@@ -153,34 +84,52 @@
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
 
-      const name = form.name.value;
-      const mobile = form.mobile.value;
-      const email = form.email.value;
-      const vehicle = form.vehicle.value;
+      const data = {
+        name: form.name.value,
+        mobile: form.mobile.value,
+        email: form.email.value,
+        vehicle: form.vehicle.value
+      };
 
-      // Random voucher code
-      const voucher = "FV-" + Math.random().toString(36).substr(2,6).toUpperCase();
-
-      // 1. Open Razorpay Payment Link
-      window.open("https://rzp.io/rzp/LY1ShVnH", "_blank");
-
-      // 2. Show voucher on page
-      resultBox.innerText = "Voucher Code: " + voucher;
-
-      // 3. Send data + voucher to Formspree
-      await fetch("https://formspree.io/f/movnzdga", {
-        method: "POST",
+      const res = await fetch('/.netlify/functions/create-order', {
+        method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          name,
-          email,
-          mobile,
-          vehicle,
-          voucher,
-          _replyto: email,
-          _subject: "Your Fuel Voucher Code from Fuel Voucher"
-        })
+        body: JSON.stringify(data)
       });
+
+      const order = await res.json();
+
+      const options = {
+        key: order.key,
+        amount: order.amount,
+        currency: order.currency,
+        order_id: order.order_id,
+        name: "Fuel Voucher",
+        description: "Voucher worth ₹1200",
+        handler: async function (response) {
+          const verifyRes = await fetch('/.netlify/functions/verify-payment', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              ...data,
+              razorpay_order_id: response.razorpay_order_id,
+              razorpay_payment_id: response.razorpay_payment_id,
+              razorpay_signature: response.razorpay_signature
+            })
+          });
+
+          const verifyJson = await verifyRes.json();
+
+          if (verifyJson.ok) {
+            resultBox.innerText = "✅ Payment Successful! Your voucher code will be generated within 24–48 hours and sent to your email.";
+          } else {
+            resultBox.innerText = "❌ Payment verification failed!";
+          }
+        }
+      };
+
+      const rzp = new Razorpay(options);
+      rzp.open();
     });
   </script>
 </body>
