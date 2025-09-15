@@ -109,56 +109,42 @@
   <section id="refund" class="container">
     <h2>Refund & Cancellation Policy</h2>
     <p>All voucher purchases are <strong>non-refundable</strong>. Once the payment is processed, it cannot be cancelled.</p>
-    <ul>
-      <li>Voucher validity: 6 months from purchase.</li>
-      <li>Expired or unused vouchers cannot be refunded.</li>
-      <li>No replacements for lost or stolen vouchers.</li>
-    </ul>
   </section>
 
   <!-- Shipping Policy -->
   <section id="shipping" class="container">
     <h2>Shipping Policy</h2>
-    <p>This is a digital product. No physical shipping is required.</p>
-    <ul>
-      <li>Delivery Mode: Email & On-screen confirmation</li>
-      <li>Delivery Time: Instant after successful payment</li>
-    </ul>
+    <p>This is a digital product. No physical shipping is required. Delivery via Email & On-screen confirmation, instant after payment.</p>
   </section>
 
   <!-- Privacy Policy -->
   <section id="privacy" class="container">
     <h2>Privacy Policy</h2>
-    <p>Your privacy is important to us. We only collect information necessary to process your order.</p>
-    <ul>
-      <li>We do not share your personal data with third parties.</li>
-      <li>Payments are securely processed by Razorpay.</li>
-      <li>We may contact you only regarding your voucher order.</li>
-    </ul>
+    <p>Your privacy is important to us. We only collect info needed to process your order. Payments handled securely via Razorpay.</p>
   </section>
 
   <!-- FAQ -->
   <section id="faq" class="container">
     <h2>FAQ</h2>
     <p><strong>Q: Where can I use this voucher?</strong><br>A: At participating Indian Oil petrol pumps across India.</p>
-    <p><strong>Q: How will I receive my voucher?</strong><br>A: You will see it on screen after payment, and it will also be sent to your email.</p>
+    <p><strong>Q: How will I receive my voucher?</strong><br>A: On screen after payment + sent to your email.</p>
     <p><strong>Q: Is the voucher refundable?</strong><br>A: No, once purchased it cannot be refunded.</p>
   </section>
 
   <!-- Contact -->
   <section id="contact" class="container">
     <h2>Contact Us</h2>
-    <p>Email: <a href="mailto:support@yourdomain.in">support@yourdomain.in</a></p>
+    <p>Email: <a href="mailto:indianoilvouchers@gmail.com">indianoilvouchers@gmail.com</a></p>
     <p>Phone: +91-9876543210</p>
     <p>WhatsApp: +91-9876543210</p>
   </section>
 
   <footer>
     <p>© 2025 Fuel Voucher. All Rights Reserved.</p>
-    <p>Contact: support@yourdomain.in | +91-9876543210</p>
+    <p>Contact: <a href="mailto:indianoilvouchers@gmail.com">indianoilvouchers@gmail.com</a> | +91-9876543210</p>
   </footer>
 
-  <!-- Razorpay Script -->
+  <!-- Razorpay + Formspree Script -->
   <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
   <script>
     const form = document.getElementById('buyForm');
@@ -167,53 +153,34 @@
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
 
-      const data = {
-        name: form.name.value,
-        mobile: form.mobile.value,
-        email: form.email.value,
-        vehicle: form.vehicle.value
-      };
+      const name = form.name.value;
+      const mobile = form.mobile.value;
+      const email = form.email.value;
+      const vehicle = form.vehicle.value;
 
-      // Step 1: Call Netlify function to create order
-      const res = await fetch('/.netlify/functions/create-order', {
-        method: 'POST',
+      // Random voucher code
+      const voucher = "FV-" + Math.random().toString(36).substr(2,6).toUpperCase();
+
+      // 1. Open Razorpay Payment Link
+      window.open("https://rzp.io/rzp/LY1ShVnH", "_blank");
+
+      // 2. Show voucher on page
+      resultBox.innerText = "Voucher Code: " + voucher;
+
+      // 3. Send data + voucher to Formspree
+      await fetch("https://formspree.io/f/movnzdga", {
+        method: "POST",
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data)
+        body: JSON.stringify({
+          name,
+          email,
+          mobile,
+          vehicle,
+          voucher,
+          _replyto: email,
+          _subject: "Your Fuel Voucher Code from Fuel Voucher"
+        })
       });
-      const order = await res.json();
-
-      // Step 2: Open Razorpay popup
-      const options = {
-        key: order.key, // Netlify env variable (RAZORPAY_KEY_ID)
-        amount: order.amount,
-        currency: order.currency,
-        order_id: order.order_id,
-        name: "Fuel Voucher",
-        description: "Voucher worth ₹1200",
-        handler: async function (response) {
-          // Step 3: Verify payment
-          const verifyRes = await fetch('/.netlify/functions/verify-payment', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              ...data,
-              razorpay_order_id: response.razorpay_order_id,
-              razorpay_payment_id: response.razorpay_payment_id,
-              razorpay_signature: response.razorpay_signature
-            })
-          });
-          const verifyJson = await verifyRes.json();
-
-          if (verifyJson.ok) {
-            resultBox.innerText = "Voucher Code: " + verifyJson.voucher;
-          } else {
-            resultBox.innerText = "Payment verification failed!";
-          }
-        }
-      };
-
-      const rzp = new Razorpay(options);
-      rzp.open();
     });
   </script>
 </body>
