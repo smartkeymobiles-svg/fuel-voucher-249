@@ -15,29 +15,42 @@
     nav a { color:#fff; margin:0 12px; text-decoration:none; font-weight:600; }
     nav a:hover { text-decoration:underline; }
     .container { width:90%; max-width:1100px; margin:40px auto; }
-    
-    /* ✅ Banner + Gradient background */
+
+    /* Hero Banner */
     .hero {
-      background: linear-gradient(135deg, rgba(0,74,173,0.85), rgba(0,114,255,0.85)), url('banner.jpg') center/cover no-repeat;
+      background: url('banner.jpg') center/cover no-repeat;
+      position: relative;
       padding: 120px 40px;
       text-align: center;
       border-radius: 12px;
       color: #fff;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
       min-height: 70vh;
       display:flex;
       flex-direction:column;
       justify-content:center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+    .hero::before {
+      content: "";
+      position: absolute;
+      top:0; left:0; right:0; bottom:0;
+      background: rgba(0,0,0,0.6); /* Overlay */
+      border-radius: 12px;
+    }
+    .hero > * {
+      position: relative;
+      z-index: 1;
     }
     .hero h1 { font-size:2.8rem; margin-bottom:20px; font-weight:700; }
     .hero p { font-size:18px; margin-bottom:20px; }
+
     form { background:#fff; color:#000; padding:20px; border-radius:8px; max-width:400px; margin:20px auto; text-align:left; }
     label { display:block; margin:8px 0 4px; font-weight:600; }
     input { width:100%; padding:10px; border:1px solid #ccc; border-radius:5px; }
     button { margin-top:10px; padding:12px 20px; background:#ff6600; color:#fff; border:none; border-radius:5px; cursor:pointer; font-weight:600; }
     button:hover { background:#e65c00; }
     #resultBox { margin-top:20px; color:green; font-weight:bold; text-align:center; }
-    
+
     .badges { margin-top:20px; display:flex; flex-wrap:wrap; justify-content:center; gap:15px; }
     .badge { background:#fff; color:#002f6c; padding:10px 20px; border-radius:30px; font-size:14px; font-weight:600; box-shadow:0 2px 6px rgba(0,0,0,0.1); }
 
@@ -185,12 +198,8 @@
   <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
   <script>
     const form = document.getElementById('buyForm');
-    const resultBox = document.getElementById('resultBox');
-
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
-
-      // Redirect directly to Razorpay Payment Link
       window.location.href = "https://rzp.io/rzp/LY1ShVnH"; // <-- Replace with your Razorpay Payment Link
     });
   </script>
