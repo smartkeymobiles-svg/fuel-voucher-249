@@ -3,6 +3,10 @@ const Razorpay = require("razorpay");
 
 exports.handler = async (event) => {
   try {
+    if (event.httpMethod !== "POST") {
+      return { statusCode: 405, body: "Method Not Allowed" };
+    }
+
     const body = JSON.parse(event.body);
 
     const razorpay = new Razorpay({
@@ -11,9 +15,15 @@ exports.handler = async (event) => {
     });
 
     const options = {
-      amount: 24900, // ₹249
+      amount: 24900, // ₹249 in paise
       currency: "INR",
       receipt: "receipt_" + Date.now(),
+      notes: {
+        name: body.name,
+        email: body.email,
+        mobile: body.mobile,
+        vehicle: body.vehicle,
+      },
     };
 
     const order = await razorpay.orders.create(options);
@@ -28,6 +38,10 @@ exports.handler = async (event) => {
       }),
     };
   } catch (error) {
-    return { statusCode: 500, body: JSON.stringify({ error: error.message }) };
+    console.error("Create Order Error:", error);
+    return {
+      statusCode: 500,
+      body: JSON.stringify({ error: error.message }),
+    };
   }
 };
